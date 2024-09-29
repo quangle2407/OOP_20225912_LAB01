@@ -1,0 +1,77 @@
+What happens if users choose “Cancel”?
+
+    Khi nhấn nút "Cancel" trong JOptionPane.showConfirmDialog, sẽ trả về JOptionPane.CANCEL_OPTION. vì chưa có giá trị trả về nên màn hình sẽ hiện "You've chosen: No". vì điều kiện chỉ kiểm tra YES_OPTION và mặc định là "No" nếu No. 
+
+	Để giair quyet có thể them code như sau":
+```java
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+
+    public static void main(String[] args) {
+        int option = JOptionPane.showConfirmDialog(null, "Do you want to change to the first class ticket?");
+
+        String message;
+        switch (option) {
+            case JOptionPane.YES_OPTION:
+                message = "You've chosen: Yes";
+                break;
+            case JOptionPane.NO_OPTION:
+                message = "You've chosen: No";
+                break;
+            case JOptionPane.CANCEL_OPTION:
+                message = "You've chosen: Cancel";
+                break;
+            default:
+                message = "No option selected";
+                break;
+        }
+
+        JOptionPane.showMessageDialog(null, message);
+        System.exit(0);
+    }
+}
+```
+
+-----***-----
+
+How to customize the options for users?
+
+    có thể sử dụng JOptionPane.showOptionDialog. 
+
+```java
+import javax.swing.JOptionPane;
+
+public class ChoosingOption {
+
+    public static void main(String[] args) {
+        String[] options = {"I do", "I don't"};
+        int option = JOptionPane.showOptionDialog(null, 
+                "Do you want to change to the first class ticket?", 
+                "Choose an Option", 
+                JOptionPane.YES_NO_OPTION, 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                options, 
+                options[0]);
+
+        String message;
+        switch (option) {
+            case 0: // "I do"
+                message = "You've chosen: I do";
+                break;
+            case 1: // "I don't"
+                message = "You've chosen: I don't";
+                break;
+            case JOptionPane.CLOSED_OPTION:
+                message = "Dialog was closed";
+                break;
+            default:
+                message = "No option selected";
+                break;
+        }
+
+        JOptionPane.showMessageDialog(null, message);
+        System.exit(0);
+    }
+}
